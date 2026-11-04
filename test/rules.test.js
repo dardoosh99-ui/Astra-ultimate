@@ -15,3 +15,6 @@ test('Victoire des loups et village',()=>{assert.equal(winner([{role:'Loup',aliv
 
 test('Les places restantes deviennent automatiquement Villageois',()=>{const deck=buildRoleDeck({Loup:2,Voyante:1,Sorcière:1,Chasseur:1},10);assert.equal(deck.filter(r=>r==='Villageois').length,5);assert.equal(deck.length,10)});
 test('Impossible de sélectionner plus de rôles que de joueurs',()=>assert.throws(()=>buildRoleDeck({Loup:4,Voyante:1,Sorcière:1},5),RangeError));
+
+import {openingPhases,openingSpeechOrder} from '../lib/rules.js';
+test('Discours des candidats et présentations précèdent la première nuit',()=>{assert.deepEqual(openingPhases,['model','candidates','chiefSpeech','election','introduction','guard']);const order=openingSpeechOrder(['b'],[{id:'a'},{id:'b'},{id:'c'}]);assert.deepEqual(order.chiefSpeeches,['b']);assert.deepEqual(order.introductions,['a','b','c'])});
